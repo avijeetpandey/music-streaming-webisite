@@ -31,7 +31,7 @@ if(isset($_POST['registerButton'])){
 
     if($wasSuccesfull){
         //redirect to index page
-        header("Location : index.php");
+        header("Location:index.php");
     }
 }
 ?>
