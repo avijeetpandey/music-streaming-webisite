@@ -6,6 +6,13 @@
 
     include("includes/handlers/register-handler.php");
     include("includes/handlers/login-handler.php");
+
+    //function to remember the form value
+    function getInputValue($name){
+        if(isset($_POST[$name])){
+            echo $_POST[$name];
+        }
+    }
 ?>
 <!doctype html>
 <html lang="en">
@@ -38,29 +45,34 @@
             <p>
                 <?php echo $account->getError(Constants::$userNameCharacters); ?>
                 <label for="username">Username</label>
-                <input type="text" id="username" name="username" placeholder="Username" required>
+                <input type="text" id="username" name="username" placeholder="Username" value="<?php
+               getInputValue('username'); ?>" required>
             </p>
             <p>
                 <?php echo $account->getError(Constants::$firstNameCharacters); ?>
                 <label for="firstname">First Name </label>
-                <input type="text" id="firstname" name="firstname"  placeholder="eg Bart" required>
+                <input type="text" id="firstname" name="firstname"  placeholder="eg Bart" value="<?php
+               getInputValue('firstname'); ?>" required>
             </p>
             <p>
                 <?php echo $account->getError(Constants::$lastNameCharacters); ?>
                 <label for="lastname">Last Name</label>
-                <input type="text" id="lastname" name="lastname" placeholder="eg simpson" required>
+                <input type="text" id="lastname" name="lastname" placeholder="eg simpson" value="<?php
+               getInputValue('lastname'); ?> "required>
             </p>
             <p>
                 <?php echo $account->getError(Constants::$emailInvalid); ?>
                 <?php echo $account->getError(Constants::$emailsDoNotMatch); ?>
                 <label for="email">Email</label>
-                <input type="email" id="email" name="email" placeholder="eg bart@example.com" required>
+                <input type="email" id="email" name="email" placeholder="eg bart@example.com" value="<?php
+               getInputValue('email'); ?>" required>
             </p>
             <p>
                 <?php echo $account->getError(Constants::$emailInvalid); ?>
                 <?php echo $account->getError(Constants::$emailsDoNotMatch); ?>
                 <label for="email2">Confirm Email</label>
-                <input type="email" id="email2" name="email2" placeholder="bart@example.com" required>
+                <input type="email" id="email2" name="email2" placeholder="bart@example.com" value="<?php
+               getInputValue('email2'); ?>" required>
             </p>
             <p>
                 <?php echo $account->getError(Constants::$passwordNotAlphaNumeric); ?>
