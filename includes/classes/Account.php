@@ -9,6 +9,18 @@
             $this->con=$con;
             $this->errorArray= array();
         }
+
+        public function login($username,$password){
+            $encryptedPassword=md5($password);
+            $query = mysqli_query($this->con,"SELECT * FROM users WHERE username='$username' AND password='$encryptedPassword'");
+
+            if(mysqli_num_rows($query)==1) return true;
+            else {
+                array_push($this->errorArray,Constants::$loginFailed);
+                return false;
+            };
+        }
+
         public function register($username,$firstname,$lastname,$email,$email2,$password,$password2){
             // checking the sanitized data
             $this->validateUserName($username);
@@ -49,6 +61,11 @@
                 return ;
             }
             //Check if username exists
+            $checkUserNameQuery = mysqli_query($this->con,"SELECT username FROM users WHERE username='$username'");
+            if(mysqli_num_rows($checkUserNameQuery!=0)){
+                array_push($this->errorArray,Constants::userNameExists);
+                return ;
+            }
 
         }
         private function validateFirstName($firstname){
@@ -74,7 +91,11 @@
                 return;
             }
             //check if the email has not been already used
-
+            $checkEmailQuery = mysqli_query($this->con,"SELECT username FROM users WHERE email='$email1'");
+            if(mysqli_num_rows($checkEmailQuery!=0)){
+                array_push($this->errorArray,Constants::emailAlreadyExists);
+                return ;
+            }
         }
         private function validatePasswords($p1,$p2){
             if($p1!=$p2){

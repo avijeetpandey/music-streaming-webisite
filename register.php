@@ -30,6 +30,7 @@
         <form action="register.php" id="loginForm" method="POST">
             <h2>Login to your account</h2>
             <p>
+                <?php echo $account->getError(Constants::$loginFailed); ?>
                 <label for="loginUsername">Username</label>
                 <input type="text" id="loginUsername" name="loginUsername" placeholder="Username" required>
             </p>
@@ -45,6 +46,7 @@
             <h2>Create Your Free Streamer Account</h2>
             <p>
                 <?php echo $account->getError(Constants::$userNameCharacters); ?>
+                <?php echo $account->getError(Constants::$userNameExists); ?>
                 <label for="username">Username</label>
                 <input type="text" id="username" name="username" placeholder="Username" value="<?php
                getInputValue('username'); ?>" required>
@@ -64,6 +66,7 @@
             <p>
                 <?php echo $account->getError(Constants::$emailInvalid); ?>
                 <?php echo $account->getError(Constants::$emailsDoNotMatch); ?>
+                <?php echo $account->getError(Constants::$emailAlreadyExists); ?>
                 <label for="email">Email</label>
                 <input type="email" id="email" name="email" placeholder="eg bart@example.com" value="<?php
                getInputValue('email'); ?>" required>
