@@ -1,6 +1,9 @@
 <?php
     include('includes/classes/Account.php');
+    include('includes/classes/Constants.php');
+
     $account=new Account();
+
     include("includes/handlers/register-handler.php");
     include("includes/handlers/login-handler.php");
 ?>
@@ -33,29 +36,36 @@
         <form action="register.php" id="registerForm" method="POST">
             <h2>Create Your Free Streamer Account</h2>
             <p>
-                <?php echo $account->getError("Your username must be between 5 and 25 characters "); ?>
+                <?php echo $account->getError(Constants::$userNameCharacters); ?>
                 <label for="username">Username</label>
                 <input type="text" id="username" name="username" placeholder="Username" required>
             </p>
             <p>
-                <?php echo $account->getError("Your first name must be between 2 and 25 characters "); ?>
+                <?php echo $account->getError(Constants::$firstNameCharacters); ?>
                 <label for="firstname">First Name </label>
                 <input type="text" id="firstname" name="firstname"  placeholder="eg Bart" required>
             </p>
             <p>
-                <?php echo $account->getError("Your last name must be between 2 and 25 characters "); ?>
+                <?php echo $account->getError(Constants::$lastNameCharacters); ?>
                 <label for="lastname">Last Name</label>
                 <input type="text" id="lastname" name="lastname" placeholder="eg simpson" required>
             </p>
             <p>
+                <?php echo $account->getError(Constants::$emailInvalid); ?>
+                <?php echo $account->getError(Constants::$emailsDoNotMatch); ?>
                 <label for="email">Email</label>
                 <input type="email" id="email" name="email" placeholder="eg bart@example.com" required>
             </p>
             <p>
+                <?php echo $account->getError(Constants::$emailInvalid); ?>
+                <?php echo $account->getError(Constants::$emailsDoNotMatch); ?>
                 <label for="email2">Confirm Email</label>
                 <input type="email" id="email2" name="email2" placeholder="bart@example.com" required>
             </p>
             <p>
+                <?php echo $account->getError(Constants::$passwordNotAlphaNumeric); ?>
+                <?php echo $account->getError(Constants::$passwordCharacters); ?>
+                <?php echo $account->getError(Constants::$passwordsDoNotMatch); ?>
                 <label for="password">Password</label>
                 <input type="password" id="password" name="password" placeholder="your password" required>
             </p>
